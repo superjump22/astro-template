@@ -31,29 +31,33 @@
 
   initTheme()
 
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'theme') {
-      applyTheme(event.newValue)
-    }
-  })
+  if (!window.XivStrat) {
+    window.XivStrat = {}
 
-  window.setTheme = (theme) => {
-    if (['dark', 'light', 'system'].includes(theme)) {
-      localStorage.setItem('theme', theme)
-      applyTheme(theme)
+    window.XivStrat.setTheme = (theme) => {
+      if (['dark', 'light', 'system'].includes(theme)) {
+        localStorage.setItem('theme', theme)
+        applyTheme(theme)
+      }
     }
-  }
 
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if (localStorage.getItem('theme') === 'system') {
-        applyTheme('system')
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'theme') {
+        applyTheme(event.newValue)
       }
     })
-  }
 
-  // See https://docs.astro.build/en/guides/view-transitions/#script-re-execution
-  // Runs in response to the astro:after-swap event, which happens immediately after the new page has replaced the old page and before the DOM elements are painted to the screen.
-  // This avoids a flash of light theme after page navigation by checking and, if necessary, setting the dark mode theme before the new page is rendered
-  document.addEventListener('astro:after-swap', initTheme)
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (localStorage.getItem('theme') === 'system') {
+          applyTheme('system')
+        }
+      })
+    }
+
+    // See https://docs.astro.build/en/guides/view-transitions/#script-re-execution
+    // Runs in response to the astro:after-swap event, which happens immediately after the new page has replaced the old page and before the DOM elements are painted to the screen.
+    // This avoids a flash of light theme after page navigation by checking and, if necessary, setting the dark mode theme before the new page is rendered
+    document.addEventListener('astro:after-swap', initTheme)
+  }
 </script>
