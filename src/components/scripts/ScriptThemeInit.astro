@@ -1,0 +1,48 @@
+<script is:inline>
+  const applyTheme = (theme) => {
+    const resolvedTheme = (() => {
+      if (['dark', 'light'].includes(theme)) {
+        return theme
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    })()
+
+    if (resolvedTheme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
+
+  const theme = (() => {
+    const theme = localStorage.getItem('theme') ?? ''
+    if (['dark', 'light'].includes(theme)) {
+      return theme
+    }
+    return 'system'
+  })()
+
+  localStorage.setItem('theme', theme)
+  applyTheme(theme)
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'theme') {
+      applyTheme(event.newValue)
+    }
+  })
+
+  window.applyTheme = (theme) => {
+    if (['dark', 'light', 'system'].includes(theme)) {
+      localStorage.setItem('theme', theme)
+      applyTheme(theme)
+    }
+  }
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (localStorage.getItem('theme') === 'system') {
+        applyTheme('system')
+      }
+    })
+  }
+</script>
