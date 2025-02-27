@@ -1,6 +1,5 @@
 ---
-import './src/styles/global.css'
-import ThemeProvider from '../components/ThemeProvider.astro'
+import '../styles/global.css'
 ---
 
 <!doctype html>
@@ -11,7 +10,13 @@ import ThemeProvider from '../components/ThemeProvider.astro'
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
-    <ThemeProvider />
+    {
+      import.meta.env.PROD ? (
+        <script is:inline src="/scripts/theme.min.js" />
+      ) : (
+        <script is:inline src="/scripts/theme.js" />
+      )
+    }
   </head>
   <body>
     <slot />
