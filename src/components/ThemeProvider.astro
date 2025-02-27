@@ -4,13 +4,25 @@
       if (['dark', 'light'].includes(theme)) {
         return theme
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      return mediaQuery.matches ? 'dark' : 'light'
     })()
 
-    if (resolvedTheme === 'dark') {
-      document.documentElement.classList.add('dark')
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (!window.XivStrat || !document.startViewTransition || mediaQuery.matches) {
+      if (resolvedTheme === 'dark') {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
     } else {
-      document.documentElement.classList.remove('dark')
+      document.startViewTransition(() => {
+        if (resolvedTheme === 'dark') {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      })
     }
   }
 
@@ -48,7 +60,8 @@
     })
 
     if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      mediaQuery.addEventListener('change', () => {
         if (localStorage.getItem('theme') === 'system') {
           applyTheme('system')
         }
