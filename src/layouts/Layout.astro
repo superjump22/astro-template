@@ -1,6 +1,6 @@
 ---
 import './src/styles/global.css'
-import ScriptThemeInit from '../components/scripts/ScriptThemeInit.astro'
+import ThemeProvider from '../components/ThemeProvider.astro'
 ---
 
 <!doctype html>
@@ -11,7 +11,7 @@ import ScriptThemeInit from '../components/scripts/ScriptThemeInit.astro'
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
-    <ScriptThemeInit />
+    <ThemeProvider />
   </head>
   <body>
     <slot />
