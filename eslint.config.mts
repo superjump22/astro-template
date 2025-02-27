@@ -9,4 +9,5 @@ export default antfu({
   typescript: true,
   formatters: true,
   ignores: ['**/.astro/**', '**/public/**', '**/assets/**'],
+  rules: { 'no-console': 'off' },
 })
