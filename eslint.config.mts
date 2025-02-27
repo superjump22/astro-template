@@ -9,9 +9,22 @@ export default antfu(
     stylistic: true,
     typescript: true,
     formatters: true,
-    ignores: ['**/.astro/**', '**/public/**', '**/assets/**'],
   },
   {
+    ignores: [
+      '.astro/**/*',
+      '.vscode/**/*',
+      'dist/**/*',
+      'node_modules/**/*',
+      'public/**/*',
+      '!public/**/*.js',
+      'public/**/*.min.js',
+      'src/assets/**/*',
+      'package-lock*',
+      'pnpm-lock*',
+      'bun.lock*',
+      'yarn.lock*',
+    ],
     rules: {
       'no-console': 'off',
       'style/brace-style': ['error', '1tbs'],
