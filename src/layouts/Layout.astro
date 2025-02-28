@@ -2,15 +2,16 @@
 import '../styles/global.css'
 
 interface Props {
-  title: string
-  description: string
+  lang?: string
+  title?: string
+  description?: string
 }
 
-const { title, description } = Astro.props
+const { lang = 'zh-CN', title = 'Title', description = 'Description' } = Astro.props
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <title>{title}</title>
