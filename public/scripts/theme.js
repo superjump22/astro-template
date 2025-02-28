@@ -9,8 +9,7 @@ const applyTheme = (theme, useViewTransition = undefined) => {
     if (['dark', 'light'].includes(theme)) {
       return theme
     }
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    return mediaQuery.matches ? 'dark' : 'light'
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })()
 
   // Determine if view transitions should be used
@@ -77,14 +76,11 @@ if (!window.XivStrat || !window.XivStrat.setTheme) {
   })
 
   // Listen for changes to the system theme preference
-  if (window.matchMedia) {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    mediaQuery.addEventListener('change', () => {
-      if (localStorage.getItem('theme') === 'system') {
-        applyTheme('system')
-      }
-    })
-  }
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (localStorage.getItem('theme') === 'system') {
+      applyTheme('system')
+    }
+  })
 
   // See https://docs.astro.build/en/guides/view-transitions/#script-re-execution
   // Runs in response to the astro:after-swap event, which happens immediately after the new page has replaced the old page and before the DOM elements are painted to the screen.
