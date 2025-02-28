@@ -56,15 +56,17 @@ const initTheme = () => {
 initTheme()
 
 // Should only be executed once
-if (!window.XivStrat) {
+if (!window.XivStrat || !window.XivStrat.setTheme) {
+  if (!window.XivStrat) {
+    window.XivStrat = {}
+  }
+
   // Register the setTheme function for outside use
-  window.XivStrat = {
-    setTheme: (theme) => {
-      if (['dark', 'light', 'system'].includes(theme)) {
-        localStorage.setItem('theme', theme)
-        applyTheme(theme)
-      }
-    },
+  window.XivStrat.setTheme = (theme) => {
+    if (['dark', 'light', 'system'].includes(theme)) {
+      localStorage.setItem('theme', theme)
+      applyTheme(theme)
+    }
   }
 
   // Listen for changes to the theme in local storage
