@@ -19,13 +19,7 @@ const { lang = 'zh-CN', title = 'Title', description = 'Description' } = Astro.p
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    {
-      import.meta.env.PROD ? (
-        <script is:inline src="/scripts/theme.min.js" />
-      ) : (
-        <script is:inline src="/scripts/theme.js" />
-      )
-    }
+    <script is:inline src="/scripts/theme.min.js"></script>
   </head>
   <body>
     <slot />

@@ -32,7 +32,8 @@ const colors = {
 
 // Get current directory and public/scripts path
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const scriptsDir = path.resolve(__dirname, '../public/scripts')
+const scriptsDir = path.resolve(__dirname, './src/public-scripts')
+const publicScriptsDir = path.resolve(__dirname, './public/scripts')
 
 // Track stats
 let processedCount = 0
@@ -171,7 +172,7 @@ async function processScriptsDirectory() {
     // Only process .js files that aren't already minified
     if (file.endsWith('.js') && !file.endsWith('.min.js')) {
       const inputFile = path.join(scriptsDir, file)
-      const outputFile = path.join(scriptsDir, file.replace('.js', '.min.js'))
+      const outputFile = path.join(publicScriptsDir, file.replace('.js', '.min.js'))
 
       // Check if output file exists and is newer than input file
       const inputStat = fs.statSync(inputFile)

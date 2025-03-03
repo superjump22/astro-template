@@ -17,8 +17,6 @@ export default antfu(
       'dist/**/*',
       'node_modules/**/*',
       'public/**/*',
-      '!public/**/*.js',
-      'public/**/*.min.js',
       'src/assets/**/*',
       'package-lock*',
       'pnpm-lock*',
