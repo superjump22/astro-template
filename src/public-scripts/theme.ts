@@ -22,22 +22,34 @@ const applyTheme = (theme: Theme, useViewTransition: boolean | undefined = undef
   useViewTransition ??= 'startViewTransition' in document && !mediaQuery.matches
   useViewTransition &&= 'startViewTransition' in document && !mediaQuery.matches
 
+  const updateTheme = () => {
+    let updated = false
+    if (resolvedTheme === 'dark') {
+      if (!document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.add('dark')
+        updated = true
+      }
+    } else {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark')
+        updated = true
+      }
+    }
+    if (updated) {
+      document.dispatchEvent(new CustomEvent('theme-changed', {
+        detail: { theme: resolvedTheme },
+      }) as ThemeChangeEvent)
+    }
+  }
+
   if (useViewTransition) {
     // Use View Transitions API if available
     document.startViewTransition(() => {
-      if (resolvedTheme === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
+      updateTheme()
     })
   } else {
     // Apply the theme without view transitions
-    if (resolvedTheme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    updateTheme()
   }
 }
 
