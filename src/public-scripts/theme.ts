@@ -1,9 +1,14 @@
 /**
+ * Theme options for the application
+ */
+type Theme = 'dark' | 'light' | 'system'
+
+/**
  * Applies the theme to the document.
  * @param theme - The theme to apply, possible values: 'dark' | 'light' | 'system'
  * @param useViewTransition - Whether to use view transitions, possible values: boolean | undefined
  */
-const applyTheme = (theme, useViewTransition = undefined) => {
+const applyTheme = (theme: Theme, useViewTransition: boolean | undefined = undefined): void => {
   // Resolve the theme to apply
   const resolvedTheme = (() => {
     if (['dark', 'light'].includes(theme)) {
@@ -14,8 +19,8 @@ const applyTheme = (theme, useViewTransition = undefined) => {
 
   // Determine if view transitions should be used
   const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-  useViewTransition ??= document.startViewTransition && !mediaQuery.matches
-  useViewTransition &&= document.startViewTransition && !mediaQuery.matches
+  useViewTransition ??= 'startViewTransition' in document && !mediaQuery.matches
+  useViewTransition &&= 'startViewTransition' in document && !mediaQuery.matches
 
   if (useViewTransition) {
     // Use View Transitions API if available
@@ -41,9 +46,9 @@ const initTheme = () => {
   const localStorageTheme = localStorage.getItem('theme') ?? ''
   const theme = (() => {
     if (['dark', 'light'].includes(localStorageTheme)) {
-      return localStorageTheme
+      return localStorageTheme as Theme
     }
-    return 'system'
+    return 'system' as Theme
   })()
 
   if (localStorageTheme === '') {
@@ -52,6 +57,7 @@ const initTheme = () => {
   applyTheme(theme, false)
 }
 
+// Initialize the theme
 initTheme()
 
 // Should only be executed once
@@ -61,7 +67,7 @@ if (!window.XivStrat || !window.XivStrat.setTheme) {
   }
 
   // Register the setTheme function for outside use
-  window.XivStrat.setTheme = (theme) => {
+  window.XivStrat.setTheme = (theme: Theme) => {
     if (['dark', 'light', 'system'].includes(theme)) {
       localStorage.setItem('theme', theme)
       applyTheme(theme)
@@ -69,9 +75,9 @@ if (!window.XivStrat || !window.XivStrat.setTheme) {
   }
 
   // Listen for changes to the theme in local storage
-  window.addEventListener('storage', (event) => {
+  window.addEventListener('storage', (event: StorageEvent) => {
     if (event.key === 'theme') {
-      applyTheme(event.newValue)
+      applyTheme(event.newValue as Theme)
     }
   })
 
