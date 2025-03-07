@@ -78,12 +78,24 @@ if (!window.AstroTheme || !window.AstroTheme.setTheme) {
     window.AstroTheme = {}
   }
 
-  // Register the setTheme function for outside use
+  // Register functions for outside use
   window.AstroTheme.setTheme = (theme: Theme) => {
     if (['dark', 'light', 'system'].includes(theme)) {
       localStorage.setItem('theme', theme)
       applyTheme(theme)
     }
+  }
+
+  window.AstroTheme.getTheme = () => {
+    return localStorage.getItem('theme') as Theme
+  }
+
+  window.AstroTheme.getResolvedTheme = () => {
+    const localStorageTheme = localStorage.getItem('theme') as Theme
+    if (['dark', 'light'].includes(localStorageTheme)) {
+      return localStorageTheme as 'dark' | 'light'
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
   // Listen for changes to the theme in local storage
