@@ -1,9 +1,9 @@
 interface Window {
-  XivStrat?: {
+  AstroTheme?: {
     setTheme?: (theme: 'dark' | 'light' | 'system') => void
   }
 }
 
-type ThemeChangeEvent = CustomEvent<{
+type AstroThemeChangeEvent = CustomEvent<{
   theme: 'dark' | 'light'
 }>

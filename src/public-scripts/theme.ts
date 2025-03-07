@@ -38,7 +38,7 @@ const applyTheme = (theme: Theme, useViewTransition: boolean | undefined = undef
     if (updated) {
       document.dispatchEvent(new CustomEvent('theme-changed', {
         detail: { theme: resolvedTheme },
-      }) as ThemeChangeEvent)
+      }) as AstroThemeChangeEvent)
     }
   }
 
@@ -73,13 +73,13 @@ const initTheme = () => {
 initTheme()
 
 // Should only be executed once
-if (!window.XivStrat || !window.XivStrat.setTheme) {
-  if (!window.XivStrat) {
-    window.XivStrat = {}
+if (!window.AstroTheme || !window.AstroTheme.setTheme) {
+  if (!window.AstroTheme) {
+    window.AstroTheme = {}
   }
 
   // Register the setTheme function for outside use
-  window.XivStrat.setTheme = (theme: Theme) => {
+  window.AstroTheme.setTheme = (theme: Theme) => {
     if (['dark', 'light', 'system'].includes(theme)) {
       localStorage.setItem('theme', theme)
       applyTheme(theme)
