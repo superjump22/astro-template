@@ -14,6 +14,15 @@ importers:
       '@astrojs/vue':
         specifier: 5.0.7
         version: 5.0.7(astro@5.5.4(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.34.8)(typescript@5.8.2)(yaml@2.7.0))(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.34.8)(vue@3.5.13(typescript@5.8.2))(yaml@2.7.0)
+      '@nanostores/persistent':
+        specifier: 0.10.2
+        version: 0.10.2(nanostores@0.11.4)
+      '@nanostores/react':
+        specifier: 0.8.4
+        version: 0.8.4(nanostores@0.11.4)(react@19.0.0)
+      '@nanostores/vue':
+        specifier: 0.11.0
+        version: 0.11.0(nanostores@0.11.4)(vue@3.5.13(typescript@5.8.2))
       '@tailwindcss/vite':
         specifier: 4.0.15
         version: 4.0.15(vite@6.2.2(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.0))
@@ -26,6 +35,9 @@ importers:
       astro:
         specifier: 5.5.4
         version: 5.5.4(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.34.8)(typescript@5.8.2)(yaml@2.7.0)
+      nanostores:
+        specifier: 0.11.4
+        version: 0.11.4
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -782,6 +794,33 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@nanostores/persistent@0.10.2':
+    resolution: {integrity: sha512-BEndnLhRC+yP7gXTESepBbSj8XNl8OXK9hu4xAgKC7MWJHKXnEqJMqY47LUyHxK6vYgFnisyHmqq+vq8AUFyIg==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0
+
+  '@nanostores/react@0.8.4':
+    resolution: {integrity: sha512-EciHSzDXg7GmGODjegGG1VldPEinbAK+12/Uz5+MAdHmxf082Rl6eXqKFxAAu4pZAcr5dNTpv6wMfEe7XacjkQ==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0
+      react: '>=18.0.0'
+
+  '@nanostores/vue@0.11.0':
+    resolution: {integrity: sha512-4ndyLhwVFl1xhOnvWuMvYiG4K2rYvkaQWP3nJC1/RwK/dvpDgLPywwv6MnBdFydqbOGuXNaXOEwa3HsG9CujmA==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      '@nanostores/logger': '>=0.4.0'
+      '@vue/devtools-api': '>=7.6.2'
+      nanostores: '>=0.11.3'
+      vue: '>=3.3.1'
+    peerDependenciesMeta:
+      '@nanostores/logger':
+        optional: true
+      '@vue/devtools-api':
+        optional: true
 
   '@napi-rs/wasm-runtime@0.2.7':
     resolution: {integrity: sha512-5yximcFK5FNompXfJFoWanu5l8v1hNGqNHh9du1xETp9HWk/B/PzvchX55WYOPaIeNglG8++68AAiauBAtbnzw==}
@@ -2624,6 +2663,10 @@ packages:
     resolution: {integrity: sha512-b+CiXQCNMUGe0Ri64S9SXFcP9hogjAJ2Rd6GdVxhPLRm7mhGaM7VgOvCAJ1ZshfHbqVDI3uqTI5C8/GaKuLI7g==}
     engines: {node: ^18 || >=20}
     hasBin: true
+
+  nanostores@0.11.4:
+    resolution: {integrity: sha512-k1oiVNN4hDK8NcNERSZLQiMfRzEGtfnvZvdBvey3SQbgn8Dcrk0h1I6vpxApjb10PFUflZrgJ2WEZyJQ+5v7YQ==}
+    engines: {node: ^18.0.0 || >=20.0.0}
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -4542,6 +4585,20 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@nanostores/persistent@0.10.2(nanostores@0.11.4)':
+    dependencies:
+      nanostores: 0.11.4
+
+  '@nanostores/react@0.8.4(nanostores@0.11.4)(react@19.0.0)':
+    dependencies:
+      nanostores: 0.11.4
+      react: 19.0.0
+
+  '@nanostores/vue@0.11.0(nanostores@0.11.4)(vue@3.5.13(typescript@5.8.2))':
+    dependencies:
+      nanostores: 0.11.4
+      vue: 3.5.13(typescript@5.8.2)
 
   '@napi-rs/wasm-runtime@0.2.7':
     dependencies:
@@ -6831,6 +6888,8 @@ snapshots:
   nanoid@3.3.8: {}
 
   nanoid@5.1.2: {}
+
+  nanostores@0.11.4: {}
 
   natural-compare@1.4.0: {}
 
